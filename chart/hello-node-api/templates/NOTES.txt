@@ -1,0 +1,11 @@
+1. Get the application URL by running these commands:
+
+  - If you installed with `--set service.type=LoadBalancer`:
+
+      kubectl get svc --namespace {{ .Release.Namespace }} -l app.kubernetes.io/instance={{ .Release.Name }}
+
+  - Or port-forward to test locally:
+
+      kubectl port-forward svc/{{ include "hello-node-api.fullname" . }} 3000:{{ .Values.service.port }}
+
+  Then visit: http://localhost:3000

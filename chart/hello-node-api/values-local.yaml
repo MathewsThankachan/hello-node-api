@@ -1,0 +1,27 @@
+# Local environment values for quick installs (minikube/kind/microk8s)
+replicaCount: 1
+
+image:
+  repository: your-registry/hello-node-api
+  tag: "latest"
+  pullPolicy: IfNotPresent
+
+service:
+  # Use NodePort for local clusters that do not provide a LoadBalancer
+  type: NodePort
+  port: 3000
+  nodePort: 30080
+
+weatherApi:
+  baseUrl: "http://api.weatherapi.com/v1"
+  # For local installs, prefer using a Kubernetes Secret or local .env
+  key: ""
+  keySecretName: ""
+  keySecretKey: "WEATHERAPI_KEY"
+
+resources: {}
+
+# Useful for local testing; set tolerations/affinity if needed
+nodeSelector: {}
+tolerations: []
+affinity: {}

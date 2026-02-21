@@ -1,0 +1,6 @@
+node_modules/
+.env
+/tmp/hello-node-api.log
+.DS_Store
+node_modules/
+.env

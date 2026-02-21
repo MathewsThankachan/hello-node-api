@@ -1,0 +1,18 @@
+replicaCount: 2
+
+image:
+  repository: your-registry/hello-node-api
+  tag: "latest"
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 3000
+
+weatherApi:
+  baseUrl: "http://api.weatherapi.com/v1"
+  key: ""
+  keySecretName: "qa-weather-secret"
+  keySecretKey: "WEATHERAPI_KEY"
+
+resources: {}

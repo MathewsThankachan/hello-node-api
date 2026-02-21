@@ -1,0 +1,37 @@
+replicaCount: 1
+
+image:
+  repository: your-registry/hello-node-api
+  tag: "latest"
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 3000
+
+weatherApi:
+  # Base URL (optional) — default points to WeatherAPI.com v1
+  baseUrl: "http://api.weatherapi.com/v1"
+  # Option A: set the key directly in values (not recommended for secrets)
+  key: ""
+  # Option B (recommended): specify an existing Kubernetes Secret name that contains the key
+  # If set, the deployment will read the key from this secret using `keyName` below.
+  keySecretName: ""
+  # The key name inside the Kubernetes Secret. Default is `WEATHERAPI_KEY`.
+  keySecretKey: "WEATHERAPI_KEY"
+
+ingress:
+  enabled: false
+  annotations: {}
+  hosts:
+    - host: chart-example.local
+      paths:
+        - /
+
+resources: {}
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

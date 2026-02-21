@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "hello-node-api.fullname" . }}
+  labels:
+    {{- include "hello-node-api.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "hello-node-api.name" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ include "hello-node-api.name" . }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: {{ .Values.service.port }}
+          env:
+            - name: PORT
+              value: "{{ .Values.service.port }}"
+            - name: WEATHERAPI_BASE_URL
+              value: "{{ .Values.weatherApi.baseUrl }}"
+            - name: APP_CONFIG
+              value: >-
+                {{- $weather := dict "baseUrl" .Values.weatherApi.baseUrl -}}
+                {{- if .Values.weatherApi.key }}
+                {{- $_ := set $weather "key" .Values.weatherApi.key -}}
+                {{- end }}
+                {{- $cfg := dict "port" .Values.service.port "weatherApi" $weather -}}
+                {{ toJson $cfg | quote }}
+            {{- if .Values.weatherApi.key }}
+            - name: WEATHERAPI_KEY
+              value: "{{ .Values.weatherApi.key }}"
+            {{- else if .Values.weatherApi.keySecretName }}
+            - name: WEATHERAPI_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.weatherApi.keySecretName }}
+                  key: {{ .Values.weatherApi.keySecretKey }}
+            {{- end }}
+          resources: {{- toYaml .Values.resources | nindent 12 }}

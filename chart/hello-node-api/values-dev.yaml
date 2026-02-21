@@ -1,0 +1,20 @@
+replicaCount: 1
+
+image:
+  repository: your-registry/hello-node-api
+  tag: "latest"
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 3000
+
+weatherApi:
+  baseUrl: "http://api.weatherapi.com/v1"
+  # The API key was removed from source control for security.
+  # Set this value via a Kubernetes Secret or a local `.env` when running locally.
+  key: ""
+  keySecretName: "dev-weather-secret"
+  keySecretKey: "WEATHERAPI_KEY"
+
+resources: {}
