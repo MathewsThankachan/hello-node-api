@@ -8,8 +8,9 @@ pipeline:
     ci:
       codebase:
         connectorRef: Github
-        repoName: <+input>
+        repoName: hello-node-api
         build: <+input>
+        sparseCheckout: []
   stages:
     - stage:
         name: Build
