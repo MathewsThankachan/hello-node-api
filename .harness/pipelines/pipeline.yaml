@@ -33,7 +33,7 @@ pipeline:
                   identifier: npm_install
                   spec:
                     connectorRef: Docker_Container_registry
-                    image: hello-node-api
+                    image: node:20-alpine
                     shell: Sh
                     command: npm ci
           infrastructure:
