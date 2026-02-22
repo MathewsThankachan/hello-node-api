@@ -1,0 +1,13 @@
+infrastructureDefinition:
+  name: loacal-k8s
+  identifier: loacalk8s
+  orgIdentifier: default
+  projectIdentifier: default_project
+  environmentRef: localdev
+  deploymentType: Kubernetes
+  type: KubernetesDirect
+  spec:
+    connectorRef: asdf
+    namespace: ns-api
+    releaseName: release-<+INFRA_KEY_SHORT_ID>
+  allowSimultaneousDeployments: false
