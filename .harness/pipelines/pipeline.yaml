@@ -1,0 +1,42 @@
+pipeline:
+  name: hello-node-api
+  identifier: hellonodeapi
+  projectIdentifier: default_project
+  orgIdentifier: default
+  tags: {}
+  properties:
+    ci:
+      codebase:
+        connectorRef: Github
+        repoName: <+input>
+        build: <+input>
+  stages:
+    - stage:
+        name: Build
+        identifier: Build
+        description: ""
+        type: CI
+        spec:
+          cloneCodebase: true
+          caching:
+            enabled: false
+            override: true
+            paths: []
+          buildIntelligence:
+            enabled: false
+          platform:
+            os: MacOS
+            arch: Amd64
+          runtime:
+            type: Docker
+            spec:
+              harnessImageConnectorRef: account.harnessImage
+          execution:
+            steps:
+              - step:
+                  type: Run
+                  name: npm install
+                  identifier: npm_install
+                  spec:
+                    shell: Sh
+                    command: npm ci
