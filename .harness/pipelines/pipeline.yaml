@@ -45,15 +45,6 @@ pipeline:
                     repo: mattthankachan/hello-node-api
                     tags:
                       - latest
-              - step:
-                  type: Run
-                  name: Output
-                  identifier: Output
-                  spec:
-                    connectorRef: Docker_Container_registry
-                    image: node:20-alpine
-                    shell: Sh
-                    command: PKG_NAME=<+execution.steps.
           infrastructure:
             type: KubernetesDirect
             spec:
