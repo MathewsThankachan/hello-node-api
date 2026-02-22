@@ -36,6 +36,15 @@ pipeline:
                     image: node:20-alpine
                     shell: Sh
                     command: npm ci
+              - step:
+                  type: BuildAndPushDockerRegistry
+                  name: BuildAndPushDockerRegistry_1
+                  identifier: BuildAndPushDockerRegistry_1
+                  spec:
+                    connectorRef: Docker_Container_registry
+                    repo: mattthankachan
+                    tags:
+                      - latest
           infrastructure:
             type: KubernetesDirect
             spec:
