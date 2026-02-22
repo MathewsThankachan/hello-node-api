@@ -1,0 +1,5 @@
+service:
+  name: node-api-svc
+  identifier: nodeapisvc
+  orgIdentifier: default
+  projectIdentifier: default_project
