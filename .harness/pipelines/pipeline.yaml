@@ -32,7 +32,7 @@ pipeline:
                   name: npm install
                   identifier: npm_install
                   spec:
-                    connectorRef: account.harnessImage
+                    connectorRef: Docker_Container_registry
                     image: hello-node-api
                     shell: Sh
                     command: npm ci
