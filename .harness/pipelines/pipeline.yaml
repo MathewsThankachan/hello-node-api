@@ -38,11 +38,11 @@ pipeline:
                     command: npm ci
               - step:
                   type: BuildAndPushDockerRegistry
-                  name: BuildAndPushDockerRegistry_1
+                  name: Push Image
                   identifier: BuildAndPushDockerRegistry_1
                   spec:
                     connectorRef: Docker_Container_registry
-                    repo: mattthankachan
+                    repo: mattthankachan/hello-node-api
                     tags:
                       - latest
           infrastructure:
