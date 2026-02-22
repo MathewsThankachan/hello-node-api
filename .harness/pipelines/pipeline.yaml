@@ -40,7 +40,7 @@ pipeline:
             type: KubernetesDirect
             spec:
               connectorRef: asdf
-              namespace: <+input>
+              namespace: ns-api
               automountServiceAccountToken: true
               nodeSelector: {}
               harnessImageConnectorRef: account.harnessImage
