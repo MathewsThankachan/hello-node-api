@@ -1,5 +1,5 @@
 infrastructureDefinition:
-  name: loca
+  name: local-env
   identifier: loca
   orgIdentifier: default
   projectIdentifier: default_project
