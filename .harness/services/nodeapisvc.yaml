@@ -3,3 +3,17 @@ service:
   identifier: nodeapisvc
   orgIdentifier: default
   projectIdentifier: default_project
+  serviceDefinition:
+    spec:
+      artifacts:
+        primary:
+          primaryArtifactRef: Artificat
+          sources:
+            - spec:
+                connectorRef: Docker_Container_registry
+                imagePath: mattthankachan/hello-node-api
+                tag: latest
+                digest: ""
+              identifier: Artificat
+              type: DockerRegistry
+    type: NativeHelm
