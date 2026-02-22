@@ -24,13 +24,6 @@ pipeline:
             paths: []
           buildIntelligence:
             enabled: false
-          platform:
-            os: MacOS
-            arch: Amd64
-          runtime:
-            type: Docker
-            spec:
-              harnessImageConnectorRef: account.harnessImage
           execution:
             steps:
               - step:
@@ -38,5 +31,16 @@ pipeline:
                   name: npm install
                   identifier: npm_install
                   spec:
+                    connectorRef: account.harnessImage
+                    image: hello-node-api
                     shell: Sh
                     command: npm ci
+          infrastructure:
+            type: KubernetesDirect
+            spec:
+              connectorRef: asdf
+              namespace: <+input>
+              automountServiceAccountToken: true
+              nodeSelector: {}
+              harnessImageConnectorRef: account.harnessImage
+              os: Linux
